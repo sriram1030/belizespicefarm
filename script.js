@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentSlide = 0;
         let slideInterval;
 
-        // Function to show a specific slide
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);
@@ -20,44 +19,37 @@ document.addEventListener('DOMContentLoaded', function() {
             currentSlide = index;
         }
 
-        // Function to go to the next slide
         function nextSlide() {
             const nextIndex = (currentSlide + 1) % slides.length;
             showSlide(nextIndex);
         }
 
-        // Function to go to the previous slide
         function prevSlide() {
             const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
             showSlide(prevIndex);
         }
 
-        // Function to start the automatic slide transition
         function startSlider() {
-            clearInterval(slideInterval); // Clear existing interval to prevent speeding up
-            slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
         }
 
-        // Event listeners for arrow buttons
         nextButton.addEventListener('click', () => {
             nextSlide();
-            startSlider(); // Restart timer on manual click
+            startSlider();
         });
 
         prevButton.addEventListener('click', () => {
             prevSlide();
-            startSlider(); // Restart timer on manual click
+            startSlider();
         });
         
-        // Optional: Pause slider on hover
         heroSlider.addEventListener('mouseenter', () => clearInterval(slideInterval));
         heroSlider.addEventListener('mouseleave', startSlider);
 
-        // Initial setup
         showSlide(0);
         startSlider();
     }
-
 
     //==============================================//
     //======= 2. TESTIMONIAL SLIDER LOGIC ==========//
@@ -69,8 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentTestimonialSlide = 0;
         let testimonialInterval;
 
-        // Create navigation dots dynamically
-        dotsContainer.innerHTML = ''; // Clear any existing dots
+        dotsContainer.innerHTML = '';
         testimonialSlides.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.classList.add('testimonial-dot');
@@ -84,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const testimonialDots = document.querySelectorAll('.testimonial-dot');
 
-        // Function to show a specific testimonial slide
         function showTestimonial(index) {
             testimonialSlides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);
@@ -95,15 +85,13 @@ document.addEventListener('DOMContentLoaded', function() {
             currentTestimonialSlide = index;
         }
 
-        // Function to go to the next testimonial
         function nextTestimonial() {
             const nextIndex = (currentTestimonialSlide + 1) % testimonialSlides.length;
             showTestimonial(nextIndex);
         }
 
-        // Function to start and restart the auto-play interval
         function startInterval() {
-            testimonialInterval = setInterval(nextTestimonial, 7000); // Change testimonial every 7 seconds
+            testimonialInterval = setInterval(nextTestimonial, 7000);
         }
 
         function restartInterval() {
@@ -111,11 +99,9 @@ document.addEventListener('DOMContentLoaded', function() {
             startInterval();
         }
 
-        // Initial setup
         showTestimonial(0);
         startInterval();
     }
-
 
     //==============================================//
     //======= 3. MOBILE NAVIGATION LOGIC ===========//
@@ -126,20 +112,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdownMenu = document.querySelector('.dropdown-menu');
 
     if (menuToggle && navLinks) {
-        // Mobile hamburger menu toggle
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('show');
         });
     }
 
     if (dropdownLink && dropdownMenu && navLinks) {
-        // Mobile dropdown toggle for "Tours"
         dropdownLink.addEventListener('click', (event) => {
-            // Only run this logic if the mobile menu is visible
             if (navLinks.classList.contains('show')) {
-                event.preventDefault(); // Stop the link from trying to navigate
-                
-                // Toggle the visibility of the dropdown sub-menu
+                event.preventDefault();
                 const isDisplayed = dropdownMenu.style.display === 'block';
                 dropdownMenu.style.display = isDisplayed ? 'none' : 'block';
             }
